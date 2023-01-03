@@ -1,31 +1,16 @@
-/ q tick.q sym . -p 5001 </dev/null >foo 2>&1 &
-/2014.03.12 remove license check
-/2013.09.05 warn on corrupt log
-/2013.08.14 allow <endofday> when -u is set
-/2012.11.09 use timestamp type rather than time. -19h/"t"/.z.Z -> -16h/"n"/.z.P
-/2011.02.10 i->i,j to avoid duplicate data if subscription whilst data in buffer
-/2009.07.30 ts day (and "d"$a instead of floor a)
-/2008.09.09 .k -> .q, 2.4
-/2008.02.03 tick/r.k allow no log
-/2007.09.03 check one day flip
-/2006.10.18 check type?
-/2006.07.24 pub then log
-/2006.02.09 fix(2005.11.28) .z.ts end-of-day
-/2006.01.05 @[;`sym;`g#] in tick.k load
-/2005.12.21 tick/r.k reset `g#sym
-/2005.12.11 feed can send .u.endofday
-/2005.11.28 zero-end-of-day
-/2005.10.28 allow`time on incoming
-/2005.10.10 zero latency
-/"kdb+tick 2.8 2014.03.12"
+/
+Start Command: q tick.q <schemas> <log> <tick> -p 5010
 
-/q tick.q SRC [DST] [-p 5010] [-o h]
+$EXECQ $DIR_Q/tick.q sym $DIR_LOG -p 5010 $DIR_TICK
+\
+
 system"l q/tick/",(src:first .z.x,enlist"sym"),".q"
 
 / Ensure port is specifided as 5010
 if[not system"p";system"p 5010"]
 
-\l q/tick/u.
+\l q/tick/u.q
+
 \d .u
 ld:{if[not type key L::`$(-10_string L),string x;.[L;();:;()]];i::j::-11!(-2;L);if[0<=type i;-2 (string L)," is a corrupt log. Truncate to length ",(string last i)," and restart";exit 1];hopen L};
 tick:{init[];if[not min(`time`sym~2#key flip value@)each t;'`timesym];@[;`sym;`g#]each t;d::.z.D;if[l::count y;L::`$":",y,"/",x,10#".";l::ld d]};
@@ -46,4 +31,5 @@ if[not system"t";system"t 1000";
  f:key flip value t;pub[t;$[0>type first x;enlist f!x;flip f!x]];if[l;l enlist (`upd;t;x);i+:1];}];
 
 \d .
+
 .u.tick[src;.z.x 1];
