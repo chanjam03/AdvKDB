@@ -1,7 +1,7 @@
 ### ~~~ CONFIGURABLE PARAMETERS ~~~ ###
-ROOT="/Users/firstderivative/dev/"
-QHOME="/Users/firstderivative/qhome/"
-QLIC="/Users/firstderivative/qhome/"
+ROOT="/Users/firstderivative/dev"
+QHOME="/Users/firstderivative/qhome"
+QLIC="/Users/firstderivative/qhome"
 QEXEC="/Users/firstderivative/qhome/m64/q"
 
 ### ~~~ INTERNAL DIRECTORIES ~~~ ###

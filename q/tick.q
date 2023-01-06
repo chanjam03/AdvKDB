@@ -1,15 +1,20 @@
 /
-Start Command: q tick.q <schemas> <log> <tick> -p 5010
+    Tick shell start process
 
-$EXECQ $DIR_Q/tick.q sym $DIR_LOG -p 5010 $DIR_TICK
+    q tick.q sym <DIR_LOG> -p <PORT_TICK> -dir <DIR_REPO>
+
+    Parameters:
+        - [p]: port to start TICK process on as determined by config file
+        - [dir]: repo base directory
 \
 
-system"l q/tick/",(src:first .z.x,enlist"sym"),".q"
+/ Checking port and ensuring that port is 5010
+if[not system"p";system"p 5010"];
 
-/ Ensure port is specifided as 5010
-if[not system"p";system"p 5010"]
-
-\l q/tick/u.q
+/ Importing filepaths and loading additional scripts
+repoDir:(.Q.opt .z.x)`dir; 
+system raze "l ",repoDir,"/q/tick/",(src:first .z.x,enlist"sym"),".q";
+system raze "l ",repoDir,"/q/tick/u.q";
 
 \d .u
 ld:{if[not type key L::`$(-10_string L),string x;.[L;();:;()]];i::j::-11!(-2;L);if[0<=type i;-2 (string L)," is a corrupt log. Truncate to length ",(string last i)," and restart";exit 1];hopen L};
