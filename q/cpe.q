@@ -14,7 +14,7 @@
 
 / Import filepaths and sourcing rdb funcitons
 dirHome:(.Q.opt .z.x)`dirHome; 
-system raze "l ",dirHome,"/q/tick/r.q"
+system raze "l ",dirHome,"/q/tick/r.q";
 
 / Calling subscription
 .u.sub[];
