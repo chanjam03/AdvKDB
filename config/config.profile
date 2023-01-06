@@ -9,6 +9,7 @@ DIR_HOME="${ROOT}/AdvKDB"
 DIR_Q="${DIR_HOME}/q"
 DIR_TICK="${DIR_HOME}/tick"
 DIR_LOG="${DIR_HOME}/log"
+DIR_HDB="${DIR_HOME}/hdb"
 
 ### ~~~ PROCESS SCRIPTS ~~~ ###
 PROC_TICK="${DIR_Q}/tick.q"
