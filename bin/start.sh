@@ -13,6 +13,7 @@ case $PROCESS in
 	RDB2) COMM="${QEXEC} ${PROC_RDB} -p ${PORT_RDB2} -tp ${PORT_TICK} -hdb ${PORT_HDB} -dirHome ${DIR_HOME} -dirHDB ${DIR_HDB} -sub OHLC";;
 	FEED) COMM="${QEXEC} ${PROC_FEED} -p ${PORT_FEED} -tp ${PORT_TICK}";;
 	RTE) COMM="${QEXEC} ${PROC_RTE} -p ${PORT_CPE} -tp ${PORT_TICK} -hdb ${PORT_HDB} -dirHome ${DIR_HOME} -dirHome ${DIR_HOME} -sub trade quote";;
+	CSV) COMM="${QEXEC} ${PROC_CSV} -p ${PORT_CSV}"
 esac
 
 $COMM
