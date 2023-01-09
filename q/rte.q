@@ -18,3 +18,23 @@ system raze "l ",dirHome,"/q/tick/r.q";
 
 / Calling subscription
 .u.sub[];
+
+/ Gen top book details
+genDetails:{[]
+    ret:select maxPx:max price by sym from trade;
+    ret:ret lj select minPx:min price by sym from trade;
+    ret:ret lj select volume:sum size by sym from trade;
+    ret:ret lj xkey[`sym;] select from quote where time = (max;time) fby sym;
+    ret:xkey[`sym;] xcols[`sym`time;] 0! ret;
+    :ret;};
+
+/ Setting function to be run on interval
+.z.ts:{
+    tab:genDetails[];
+    vals:flip value flip 0! tab;
+    {h(".u.upd";`OHLC;(enlist .z.N),x)} each vals;
+    };
+
+/ Opening handle to tickerplant and intializing .z.ts
+h:hopen hsym `$ raze "localhost:",(.Q.opt .z.x)`tp;
+\t 5000
