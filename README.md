@@ -1,3 +1,4 @@
+#AdvKDB
 Advanced kdb+ project completed as culiminating portion of First Derivatives, Capital Markets Training Program.
 
 Initializing:
