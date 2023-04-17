@@ -1,0 +1,28 @@
+Problem:
+
+    1. The below tickerplant log contains and error.
+        a) Locate the error
+        b) Fix the error
+    Show how each was performed.
+
+Solution:
+
+    To begin we can read in the tplog into a q session (started in log directory)
+    with get `:tplog and set to instance variable msg.
+
+        q) msg:get `:tplog
+
+    Looking through the tplog contents I can identify the following errors: 
+
+        1. sym entries are type chars not symbols for entry 3 and 10
+            q) show msg 2 9
+        2. the 7th entry is broken up into 3 distinct lines
+            q) show msg 6 7 8
+        3. The size column in the 5th entry is incorrect type
+            q) show msg[4;2] `size
+
+    Should be able to fix all these issues with just a single command: 
+
+        q) `:tplog_fixed set .[3 cut raze get `:tplog; (::;2); {update `$sym, "F"$price, "I"$size from string[x]} each]
+
+    Looking back at the problem areas, issues are now fixed.
