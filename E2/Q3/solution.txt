@@ -1,0 +1,30 @@
+Problem:
+
+    In your current system you have a historical database and a single hdb kdb+ instance to host user queries. 
+    Users are complaining about slowness. What is the probable cause of the slowness and suggest 2 changes that 
+    could be made to alleviate the problem. Maintain a single entry point to the system if possible.
+
+Solution:
+
+    In a system set up such as this there are a few possiblities as to why the users may be experiencing slowness
+    with queries. To list briefly: 
+        1. Data Volume: As we know the larger the data set and the data queried the longer to execute
+        2. Query Complexity: Trying to compute more complex aggregate functions, especially across the larger 
+            data sets mentioned previously will most definitely intorduce latency to the system.
+        3. Schema Design: Ensuring proper data types and applying appropriate attributes can go a long way to 
+            optimizing storage space and query performance, that being said if these are not in place can see
+            decreases in performance.
+    These three listed above I believe would be the most likely sources however a couple additional things to
+    consider if problems still persist would be the hardware running the stystem and network considerations. 
+
+    That being said in order to fix these issues there are a few things we can do:
+        - Introduce stored query functions and disable any non-stored query functions to ensure that queries
+            are properly formatted and optimized to be as efficient as possible
+        - Introduce standards for table schemas and review ones already present on disc. Ensure that if
+            possible saved down as symbols. Applying attributes where possible (sorted for instance) to speed 
+            queries. Perhaps if necessary can introduce data expiry to ensure that we are not saving data
+            past its useful period.
+
+    Finally if query latency continues to be an issue could add a gateway layer to the system, this would
+    still maintain a single point of entry for the user and would able to distribute queries to multiple
+    HDBs, likely seeing improvment when multiple queries are being attempted simultaneously.
