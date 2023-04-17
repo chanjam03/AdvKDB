@@ -1,0 +1,52 @@
+Problem:
+
+    Improve the performance of function:
+
+    StringtoDate:{[x]{$[10h~abs type x;x:"D"$x;-14h~ type x;x:x;`date$x]}'[x]} 
+    Given input: raze 500000#enlist("2010.01.01";2010.01.02)
+
+    Do not use .Q.fu
+
+Solution: 
+
+    To optimize a function, it is important to first understand exactly what the function is trying to accomplish.
+    In this case we are given a list of a type string date and date one day after, duplicated 500,000 times then
+    collapsed to be a single list. Therefore we end up with a million entries of alternating type string and type date
+    dates. When passed to the StringToDate function it itterates over every value within the input with the internal lambda
+    function:
+
+        {$[10h~abs type x;x:"D"$x;-14h~ type x;x:x;`date$x]}
+
+    This function contains a single conditional evalutation that checks the type of the passed parameter and will cast to
+    type date if it is type string. Broken down here:
+
+        {$[
+            10h~abs type x; - if x is a string
+            x:"D"$x;    - cast string to date
+            -14h~ type x; - else if x is a date 
+            x:x; - x remains the same. 
+            `date$x - else cast x to a date
+        ]}
+
+    The lambda function itself is optimized assuming that there is a possiblity that you get a type other than string or
+    date, if it were the case that types are ONLY string or date could remove they type check for date and the addiitonal
+    date cast at the end. Moving on though with this function what we are doing is applying the condition evaluation over
+    duplicate values many times. With that applying distinct and taking a sort of enumration approach with the function,
+    applying the condition check to only unique values and then re expanding should speed up performance. Seen below:
+
+        {[x] vals: distinct x; enum: vals?x; {$[10h~abs type x;x:"D"$x;-14h~ type x;x:x;`date$x]}'[u] num} 
+
+    Finally we can check against the original to ensure that not only speed is improved but we get the same return:
+
+        1. \ts {[x]{$[10h~abs type x;x:"D"$x;-14h~ type x;x:x;`date$x]}'[x]} 500000#enlist("2010.01.01";2010.01.02)
+            352 56390608 (old)
+
+        2. \ts {[x] vals: distinct x; enum: vals?x; {$[10h~abs type x;x:"D"$x;-14h~ type x;x:x;`date$x]}'[vals] enum} 500000#enlist("2010.01.01";2010.01.02)
+            89 29362336 (new)
+
+    Easy to see that both time and space have seen drastic improvment. Running a check for equality: 
+
+        ({[x]{$[10h~abs type x;x:"D"$x;-14h~ type x;x:x;`date$x]}'[x]} 500000#enlist("2010.01.01";2010.01.02)) ~ 
+            {[x] vals: distinct x; enum: vals?x; {$[10h~abs type x;x:"D"$x;-14h~ type x;x:x;`date$x]}'[vals] enum} 500000#enlist("2010.01.01";2010.01.02)
+
+    Returns 1b. This is complete.
