@@ -1,4 +1,33 @@
 Problem:
-    The 3 tables in the below zip file contain errors. Try to ascertain the error and recommend a suitable fix for each. (File included in solution folder)
+
+    The 3 tables in the below zip file contain errors. Try to ascertain the error and recommend a suitable fix 
+    for each. (Files included in solution folder)
 
 Solution:
+
+    Looking through the db folder we can identify the first error (would also see the function "get `:t1" return
+    a dictionary):
+
+        Error 1: t1 missing hidden d file which lists the order of the columns as the appear in t1
+        Solution 1: Create the missing file within t1 - `:t1/.d set `sym`price`size. With "get `:t1" can see the
+            can see the table properly now.
+
+    Trying to load t2 we get a 'length error. Checking the colums with count: 
+
+        - count get `:t2/sym -> 25
+        - count get `:t2/price -> 24
+        - count get `:t2/size -> 25
+        
+        Error 2: t2 column length is uneven, price missing an entry.
+        Solution 2: Would have to resave price column or whole table and find what the missing entry is. To ensure
+            nothing else is wrong can temporarily adjust price: `:t2/price set 25#t2`price and reload. (When you 
+            have the real values of price would replace 25#t2`price in the previous statment).
+
+    Finally, loading t3 we encounter no errors. However, upon further investigation appears that the sym column is
+    not enumerated against the db sym file.
+    
+        Error 3: t3 sym column not enumerated
+        Solution 3: Enumerate and re save the tables sym column.
+            `:t3/sym set `sym$t3`sym
+
+    Splayed table db should now be fixed.
