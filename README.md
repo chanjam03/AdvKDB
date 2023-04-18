@@ -43,3 +43,43 @@ TO FORMAT:
 
 - will need to install and import the qconnection library (also provide the link with which to download it)
 
+
+Exercise 1. Question 10.
+
+Problem:
+
+    Discuss the effect a schema change to the trade table in the above system e.g. a sequence number column was added to both trade and quote tables. How you would plan a turnover to update the schema.
+
+Solution: 
+
+    To implement a schema change such as adding a new field of sequence numbers would follow these steps:
+
+        1. Bring down system processes - need to restart the tickerplant so all other dependents will need to come down as well. 
+        2. Add column into table definition in the sym file
+        3. Bring tickerplant process back up to ensure that the new field is picked up
+        4. Reformat the HDB to ensure data congruence. Inorder to do so cna implement a dbmaint.q script - linked here - https://github.com/KxSystems/kdb/blob/master/utils/dbmaint.md 
+            and copy included in common folder of this repo.
+
+    Therefore with this system in specific lets run through the process of adding a sequence number to trade table
+
+        1. Bring down - sh bin/stop.sh ALL - will bring down any connected processes as well as the tickerplant
+        2. Add column to sym file - sym file located in AdvKDB/q/tick/sym.q can update trade table definition with the following:
+
+            trade:([]time:`timespan$();sym:`symbol$();price:`float$();size:`int$();seqNum:`int$())
+        
+        3. Starting tickerplant up again can check logs for any errors in initializing - sh bin/start.sh TICK
+        4. Opening a handle to the tickerplant on a q process can check the updated schema to make sure changes were picked up:
+
+            q) h:hopen 5010
+            q) h "trade"
+
+            Should return an empty table with the new column included - time sym price size seqNum
+                                                                        --------------------------
+
+        5. Finally to make sure historical queries will work and future EOD processing need to use dbmaint.q to update hdb structure something like the following:
+
+            q) \l AdvKDB/q/common/dbmaint.q
+            q) addcol[`:AdvKDB/hdb;`trade;`seqNum;0i]
+            q) \l `:AdvKDB/hdb - (to check)
+
+        6. Lastly, can use .Q.chk to ensure data integrity
