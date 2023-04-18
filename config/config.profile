@@ -12,7 +12,7 @@ DIR_Q="${DIR_HOME}/q"
 DIR_TICK="${DIR_HOME}/tick"
 DIR_LOG="${DIR_HOME}/log"
 DIR_HDB="${DIR_HOME}/hdb"
-DIR_FILE="${DIR_HOME}/files"
+DIR_FILES="${DIR_HOME}/files"
 DIR_SCRIPTS="${DIR_HOME}/scripts"
 
 ### ~~~ PROCESS SCRIPTS ~~~ ###

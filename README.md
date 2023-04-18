@@ -38,3 +38,8 @@ Exercise 3: API
     1. Csv file load script (python)
     2. Csv file load script (java)
     3. Web Interface - HTML5
+
+TO FORMAT:
+
+- will need to install and import the qconnection library (also provide the link with which to download it)
+

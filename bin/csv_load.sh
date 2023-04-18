@@ -24,9 +24,13 @@ LANGUAGE=$1
 NAME_CSV=$2
 NAME_TABLE=$3
 
+# Adding file root to csv name
+FILE="${DIR_FILES}/${NAME_CSV}"
+
+# Creating command to run based on passed argument
 case $LANGUAGE in
-    PYTHON) COMM="${PYEXEC} ${DIR_SCRIPTS}/csv_load.py -file ${NAME_CSV} -name ${NAME_TABLE}";;
-    JAVA) COMM="${JVEXEC} ${DIR_SCRIPTS}/csv_load.py -file ${NAME_CSV} -name ${NAME_TABLE}";;
+    PYTHON) COMM="${PYEXEC} ${DIR_SCRIPTS}/csv_load.py --file ${FILE} --table ${NAME_TABLE}";;
+    JAVA) COMM="${JVEXEC} ${DIR_SCRIPTS}/csv_load.py --file ${FILE} --table ${NAME_TABLE}"
 esac
 
 $COMM
