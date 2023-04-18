@@ -15,6 +15,7 @@ if[not system"p";system"p 5010"];
 dirHome:(.Q.opt .z.x)`dirHome; 
 system raze "l ",dirHome,"/q/tick/",(src:first .z.x,enlist"sym"),".q";
 system raze "l ",dirHome,"/q/tick/u.q";
+system raze "l ",dirHome,"/q/common/logging.q";
 
 \d .u
 ld:{if[not type key L::`$(-10_string L),string x;.[L;();:;()]];i::j::-11!(-2;L);if[0<=type i;-2 (string L)," is a corrupt log. Truncate to length ",(string last i)," and restart";exit 1];hopen L};
