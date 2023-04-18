@@ -22,7 +22,7 @@
 ################################################################################
 
 # sourcing config profile
-source . ./config/config.profile
+source ./config/config.profile
 
 # Reading and parsing parameters passed
 LANGUAGE=$1
@@ -34,7 +34,7 @@ FILE="${DIR_FILES}/${NAME_CSV}"
 
 # Creating command to run based on passed argument
 case $LANGUAGE in
-    Q) COMM="${QEXEC} ${PROC_CSV} -p ${PORT_CSV}";;
+    Q) COMM="${QEXEC} ${PROC_CSV} -p ${PORT_CSV} --tp ${PORT_TICK} --file ${FILE} --table ${NAME_TABLE}";;
     PYTHON) COMM="${PYEXEC} ${DIR_SCRIPTS}/csv_load.py --file ${FILE} --table ${NAME_TABLE}";;
     JAVA) COMM="${JVEXEC} ${DIR_SCRIPTS}/csv_load.py --file ${FILE} --table ${NAME_TABLE}"
 esac
