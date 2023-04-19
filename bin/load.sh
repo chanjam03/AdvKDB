@@ -34,9 +34,9 @@ FILE="${DIR_FILES}/${NAME_CSV}"
 
 # Creating command to run based on passed argument
 case $LANGUAGE in
-    Q) COMM="${QEXEC} ${PROC_CSV} -p ${PORT_CSV} --tp ${PORT_TICK} --file ${FILE} --table ${NAME_TABLE} </dev/null >> ${DIR_LOGS_PROC}/tick.log 2>&1 &";;
-    PYTHON) COMM="${PYEXEC} ${DIR_SCRIPTS}/csv_load.py --file ${FILE} --table ${NAME_TABLE} </dev/null >> ${DIR_LOGS_PROC}/tick.log 2>&1 &";;
-    JAVA) COMM="${JVEXEC} ${DIR_SCRIPTS}/csv_load.py --file ${FILE} --table ${NAME_TABLE} </dev/null >> ${DIR_LOGS_PROC}/tick.log 2>&1 &"
+    Q) COMM="${QEXEC} ${PROC_Q_CSV} -p ${PORT_CSV} --tp ${PORT_TICK} --file ${FILE} --table ${NAME_TABLE}";;
+    PYTHON) COMM="${PYEXEC} ${PROC_PYTHON_CSV} --file ${FILE} --table ${NAME_TABLE}";;
+    JAVA) COMM="${JVEXEC} ${PROC_JAVA_CSV} --file ${FILE} --table ${NAME_TABLE}"
 esac
 
 $COMM
