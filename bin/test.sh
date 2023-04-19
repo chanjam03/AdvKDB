@@ -23,15 +23,41 @@ source ./config/config.profile
 PROCESS=$1
 
 # Defining test commands
-TEST_TICK=$(ps -ef | grep -v "grep" | grep $PROC_TICK| wc -l)
-TEST_RDB1="${QEXEC} ${PROC_RDB} -p ${PORT_RDB1} -tp ${PORT_TICK} -hdb ${PORT_HDB} -dirHome ${DIR_HOME} -dirHDB ${DIR_HDB} -sub trade quote </dev/null >> ${DIR_LOG}/tick.log 2>&1 &"
-TEST_RDB2="${QEXEC} ${PROC_RDB} -p ${PORT_RDB2} -tp ${PORT_TICK} -hdb ${PORT_HDB} -dirHome ${DIR_HOME} -dirHDB ${DIR_HDB} -sub OHLC </dev/null >> ${DIR_LOG}/tick.log 2>&1 &"
-TEST_FEED="${QEXEC} ${PROC_FEED} -p ${PORT_FEED} -tp ${PORT_TICK} </dev/null >> ${DIR_LOG}/tick.log 2>&1 &"
-TEST_RTE="${QEXEC} ${PROC_RTE} -p ${PORT_RTE} -tp ${PORT_TICK} -hdb ${PORT_HDB} -dirHome ${DIR_HOME} -dirHome ${DIR_HOME} -sub trade quote </dev/null >> ${DIR_LOG}/tick.log 2>&1 &"
+TEST_TICK=$(ps -ef | grep -v "grep" | grep "${PROC_TICK}"| wc -l)
+TEST_RDB1=$(ps -ef | grep -v "grep" | grep "${PROC_RDB1}"| wc -l)
+TEST_RDB2=$(ps -ef | grep -v "grep" | grep "${PROC_RDB2}"| wc -l)
+TEST_FEED=$(ps -ef | grep -v "grep" | grep "${PROC_FEED}"| wc -l)
+TEST_RTE=$(ps -ef | grep -v "grep" | grep "${PROC_RTE}"| wc -l)
 
 # Testing passed process
 echo ""
 case $PROCESS in
+    ALL)
+        if [ $TEST_TICK -eq 1 ]; then
+            echo "Tickerplant is - UP"
+        else
+            echo "Tickerplant is - DOWN"
+        fi
+        if [ $TEST_RDB1 -eq 1 ]; then
+            echo "Realtime Database 1 is - UP"
+        else
+            echo "Realtime Database 1 is - DOWN"
+        fi
+        if [ $TEST_RDB2 -eq 1 ]; then
+            echo "Realtime Database 2 is - UP"
+        else
+            echo "Realtime Database 2 is - DOWN"
+        fi
+        if [ $TEST_FEED -eq 1 ]; then
+            echo "Feedhandler is - UP"
+        else
+            echo "Feedhandler is - DOWN"
+        fi
+        if [ $TEST_RTE -eq 1 ]; then
+            echo "Realtime engine is - UP"
+        else
+            echo "Realtime engine is - DOWN"
+        fi;;
 	TICK)
         if [ $TEST_TICK -eq 1 ]; then
             echo "Tickerplant is - UP"
