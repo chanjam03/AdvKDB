@@ -24,11 +24,11 @@ source ./config/config.profile
 PROCESS=$1
 
 # Defining start commands
-START_TICK="${QEXEC} ${PROC_TICK} sym ${DIR_LOG} -p ${PORT_TICK} -dirHome ${DIR_HOME} </dev/null >> ${DIR_LOG}/tick.log 2>&1 &"
-START_RDB1="${QEXEC} ${PROC_RDB} -p ${PORT_RDB1} -tp ${PORT_TICK} -hdb ${PORT_HDB} -dirHome ${DIR_HOME} -dirHDB ${DIR_HDB} -sub trade quote </dev/null >> ${DIR_LOG}/rdb1.log 2>&1 &"
-START_RDB2="${QEXEC} ${PROC_RDB} -p ${PORT_RDB2} -tp ${PORT_TICK} -hdb ${PORT_HDB} -dirHome ${DIR_HOME} -dirHDB ${DIR_HDB} -sub OHLC </dev/null >> ${DIR_LOG}/rdb2.log 2>&1 &"
-START_FEED="${QEXEC} ${PROC_FEED} -p ${PORT_FEED} -tp ${PORT_TICK} </dev/null >> ${DIR_LOG}/feed.log 2>&1 &"
-START_RTE="${QEXEC} ${PROC_RTE} -p ${PORT_RTE} -tp ${PORT_TICK} -hdb ${PORT_HDB} -dirHome ${DIR_HOME} -dirHome ${DIR_HOME} -sub trade quote </dev/null >> ${DIR_LOG}/rte.log 2>&1 &"
+START_TICK="${QEXEC} ${PROC_TICK} sym ${DIR_LOGS_REP} -p ${PORT_TICK} -dirHome ${DIR_HOME} </dev/null >> ${DIR_LOGS_PROC}/tick.log 2>&1 &"
+START_RDB1="${QEXEC} ${PROC_RDB} -p ${PORT_RDB1} -tp ${PORT_TICK} -hdb ${PORT_HDB} -dirHome ${DIR_HOME} -dirHDB ${DIR_HDB} -sub trade quote </dev/null >> ${DIR_LOGS_PROC}/rdb1.log 2>&1 &"
+START_RDB2="${QEXEC} ${PROC_RDB} -p ${PORT_RDB2} -tp ${PORT_TICK} -hdb ${PORT_HDB} -dirHome ${DIR_HOME} -dirHDB ${DIR_HDB} -sub OHLC </dev/null >> ${DIR_LOGS_PROC}/rdb2.log 2>&1 &"
+START_FEED="${QEXEC} ${PROC_FEED} -p ${PORT_FEED} -tp ${PORT_TICK} </dev/null >> ${DIR_LOGS_PROC}/feed.log 2>&1 &"
+START_RTE="${QEXEC} ${PROC_RTE} -p ${PORT_RTE} -tp ${PORT_TICK} -hdb ${PORT_HDB} -dirHome ${DIR_HOME} -dirHome ${DIR_HOME} -sub trade quote </dev/null >> ${DIR_LOGS_PROC}/rte.log 2>&1 &"
 
 # Starting process
 echo ""

@@ -1,7 +1,7 @@
 /
     Tick shell start process
 
-    q tick.q sym <DIR_LOG> -p <PORT_TICK> -dir <DIR_REPO>
+    q tick.q sym <DIR_LOGS_REP> -p <PORT_TICK> -dir <DIR_REPO>
 
     Parameters:
         - [p]: port to start TICK process on as determined by config file
