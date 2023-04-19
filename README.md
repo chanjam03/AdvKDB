@@ -83,3 +83,5 @@ Solution:
             q) \l `:AdvKDB/hdb - (to check)
 
         6. Lastly, can use .Q.chk to ensure data integrity
+
+Java package for kx connection can be found here - https://github.com/KxSystems/javakdb/releases
