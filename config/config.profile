@@ -22,7 +22,7 @@ PROC_TICK="${DIR_Q}/tick.q"
 PROC_RDB="${DIR_Q}/rdb.q"
 PROC_FEED="${DIR_Q}/feed.q"
 PROC_RTE="${DIR_Q}/rte.q"
-PROC_CSV="${DIR_Q}/csv_load.q"
+PROC_CSV="${DIR_Q}/csvLoad.q"
 
 ### ~~~ PROCESS PORTS ~~~ ###
 PORT_TICK="5010"
