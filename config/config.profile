@@ -9,13 +9,18 @@ JVEXEC="java"
 ### ~~~ INTERNAL DIRECTORIES ~~~ ###
 DIR_HOME="${ROOT}/AdvKDB"
 DIR_Q="${DIR_HOME}/q"
-DIR_TICK="${DIR_HOME}/tick"
+DIR_TICK="${DIR_Q}/tick"
+DIR_COMMON="${DIR_Q}/common"
 DIR_LOGS="${DIR_HOME}/logs"
 DIR_LOGS_PROC="${DIR_LOGS}/process"
 DIR_LOGS_REP="${DIR_LOGS}/replay"
 DIR_HDB="${DIR_HOME}/hdb"
 DIR_FILES="${DIR_HOME}/files"
 DIR_SCRIPTS="${DIR_HOME}/scripts"
+
+### ~~~ LIBRARY SCRIPTS ~~~ ###
+LIB_COMMON="${DIR_COMMON}/common.q"
+LIB_U="${DIR_TICK}/u.q"
 
 ### ~~~ PROCESS SCRIPTS ~~~ ###
 PROC_TICK="${DIR_Q}/tick.q"
