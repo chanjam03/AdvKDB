@@ -25,8 +25,8 @@ PROCESS=$1
 
 # Defining start commands
 START_TICK="${QEXEC} ${PROC_TICK} sym ${DIR_LOGS_REP} -p ${PORT_TICK} -libCommon ${LIB_COMMON} -libU ${LIB_U} -dirTick ${DIR_TICK} </dev/null >> ${DIR_LOGS_PROC}/tick.log 2>&1 &"
-START_RDB1="${QEXEC} ${PROC_RDB} -p ${PORT_RDB1} -tp ${PORT_TICK} -hdb ${PORT_HDB} -dirHome ${DIR_HOME} -dirHDB ${DIR_HDB} -sub trade quote </dev/null >> ${DIR_LOGS_PROC}/rdb1.log 2>&1 &"
-START_RDB2="${QEXEC} ${PROC_RDB} -p ${PORT_RDB2} -tp ${PORT_TICK} -hdb ${PORT_HDB} -dirHome ${DIR_HOME} -dirHDB ${DIR_HDB} -sub OHLC </dev/null >> ${DIR_LOGS_PROC}/rdb2.log 2>&1 &"
+START_RDB1="${QEXEC} ${PROC_RDB1} -p ${PORT_RDB1} -tp ${PORT_TICK} -hdbp ${PORT_HDB} -libCommon ${LIB_COMMON} -libR ${LIB_R} -dirHDB ${DIR_HDB} </dev/null >> ${DIR_LOGS_PROC}/rdb1.log 2>&1 &"
+START_RDB2="${QEXEC} ${PROC_RDB2} -p ${PORT_RDB2} -tp ${PORT_TICK} -hdbp ${PORT_HDB} -libCommon ${LIB_COMMON} -libR ${LIB_R} -dirHDB ${DIR_HDB} </dev/null >> ${DIR_LOGS_PROC}/rdb2.log 2>&1 &"
 START_FEED="${QEXEC} ${PROC_FEED} -p ${PORT_FEED} -tp ${PORT_TICK} </dev/null >> ${DIR_LOGS_PROC}/feed.log 2>&1 &"
 START_RTE="${QEXEC} ${PROC_RTE} -p ${PORT_RTE} -tp ${PORT_TICK} -hdb ${PORT_HDB} -dirHome ${DIR_HOME} -dirHome ${DIR_HOME} -sub trade quote </dev/null >> ${DIR_LOGS_PROC}/rte.log 2>&1 &"
 

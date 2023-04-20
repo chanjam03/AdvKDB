@@ -21,10 +21,12 @@ DIR_SCRIPTS="${DIR_HOME}/scripts"
 ### ~~~ LIBRARY SCRIPTS ~~~ ###
 LIB_COMMON="${DIR_COMMON}/common.q"
 LIB_U="${DIR_TICK}/u.q"
+LIB_R="${DIR_TICK}/r.q"
 
 ### ~~~ PROCESS SCRIPTS ~~~ ###
 PROC_TICK="${DIR_Q}/tick.q"
-PROC_RDB="${DIR_Q}/rdb.q"
+PROC_RDB1="${DIR_Q}/rdb1.q"
+PROC_RDB2="${DIR_Q}/rdb2.q"
 PROC_FEED="${DIR_Q}/feed.q"
 PROC_RTE="${DIR_Q}/rte.q"
 PROC_Q_CSV="${DIR_Q}/csvLoad.q"

@@ -2,11 +2,8 @@ if[not "w"=first string .z.o;system "sleep 1"];
 
 upd:insert;
 
-// Retrieving tables to subcribe to from script invocation
-.u.tabs:{$[0>type x;enlist x;x]} `$(.Q.opt .z.x)`sub;
-
 // Setting ticker plant and hdb ports
-.u.x:":" ,/: (first (.Q.opt .z.x)`tp;first (.Q.opt .z.x)`hdb);
+.u.x:":" ,/: (first (.Q.opt .z.x)`tp;first (.Q.opt .z.x)`hdbp);
 
 // End of day: save, clear, hdb reload
 .u.end:{t:tables`.;t@:where `g=attr each t@\:`sym;.Q.hdpf[`$":",.u.x 1;`:.;x;`sym];@[;`sym;`g#] each t;};

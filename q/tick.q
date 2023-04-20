@@ -18,7 +18,7 @@
 // Checking port and ensuring that port is 5010 for tickerplant
 if[not system"p";system"p 5010"];
 
-// Importing filepaths and loading additional libraries
+// Parsing command line arguments and sourcing applicable libraries
 args:(.Q.opt .z.x);
 system raze "l ",(args `libCommon);
 system raze "l ",(args `dirTick),"/",(src:first .z.x,enlist"sym"),".q";
