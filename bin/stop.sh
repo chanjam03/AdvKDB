@@ -13,7 +13,7 @@
 ##      	in the proper order
 ##
 ##  Options:
-##      - [PROCESS] -> "ALL","TICK","RDB1","RDB2","FEED","RTE"
+##      - [PROCESS] -> "ALL","TICK","RDB1","RDB2","FEED","CEP"
 ##
 ################################################################################
 
@@ -28,7 +28,7 @@ echo ""
 case $PROCESS in
         ALL)
         echo "Stopping realtime engine process"
-        lsof -i :${PORT_RTE} | grep LISTEN | awk '{print $2; exit}' | xargs kill -9
+        lsof -i :${PORT_CEP} | grep LISTEN | awk '{print $2; exit}' | xargs kill -9
         echo "Stopping feed process"
         lsof -i :${PORT_FEED} | grep LISTEN | awk '{print $2; exit}' | xargs kill -9
         echo "Stopping rdb1 process"
@@ -49,8 +49,8 @@ case $PROCESS in
 	FEED)
         echo "Stopping feed process"
         lsof -i :${PORT_FEED} | grep LISTEN | awk '{print $2; exit}' | xargs kill -9;;
-	RTE)
+	CEP)
         echo "Stopping realtime engine process"
-        lsof -i :${PORT_RTE} | grep LISTEN | awk '{print $2; exit}' | xargs kill -9;;
+        lsof -i :${PORT_CEP} | grep LISTEN | awk '{print $2; exit}' | xargs kill -9;;
 esac
 echo ""

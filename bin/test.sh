@@ -12,7 +12,7 @@
 ##      - [PROCESS]: Process to test
 ##
 ##  Options:
-##      - [PROCESS] -> "TICK","RDB1","RDB2","FEED","RTE"
+##      - [PROCESS] -> "TICK","RDB1","RDB2","FEED","CEP"
 ##
 ################################################################################
 
@@ -27,7 +27,7 @@ TEST_TICK=$(ps -ef | grep -v "grep" | grep "${PROC_TICK}"| wc -l)
 TEST_RDB1=$(ps -ef | grep -v "grep" | grep "${PROC_RDB1}"| wc -l)
 TEST_RDB2=$(ps -ef | grep -v "grep" | grep "${PROC_RDB2}"| wc -l)
 TEST_FEED=$(ps -ef | grep -v "grep" | grep "${PROC_FEED}"| wc -l)
-TEST_RTE=$(ps -ef | grep -v "grep" | grep "${PROC_RTE}"| wc -l)
+TEST_CEP=$(ps -ef | grep -v "grep" | grep "${PROC_CEP}"| wc -l)
 
 # Testing passed process
 echo ""
@@ -53,7 +53,7 @@ case $PROCESS in
         else
             echo "Feedhandler is - DOWN"
         fi
-        if [ $TEST_RTE -eq 1 ]; then
+        if [ $TEST_CEP -eq 1 ]; then
             echo "Realtime engine is - UP"
         else
             echo "Realtime engine is - DOWN"
@@ -82,8 +82,8 @@ case $PROCESS in
         else
             echo "Feedhandler is - DOWN"
         fi;;
-	RTE)
-        if [ $TEST_RTE -eq 1 ]; then
+	CEP)
+        if [ $TEST_CEP -eq 1 ]; then
             echo "Realtime engine is - UP"
         else
             echo "Realtime engine is - DOWN"

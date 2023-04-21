@@ -13,7 +13,7 @@
 ##      	in the proper order
 ##
 ##  Options:
-##      - [PROCESS] -> "ALL","TICK","RDB1","RDB2","FEED","RTE"
+##      - [PROCESS] -> "ALL","TICK","RDB1","RDB2","FEED","CEP"
 ##
 ################################################################################
 
@@ -28,7 +28,7 @@ START_TICK="${QEXEC} ${PROC_TICK} sym ${DIR_LOGS_REP} -p ${PORT_TICK} -libCommon
 START_RDB1="${QEXEC} ${PROC_RDB1} -p ${PORT_RDB1} -tp ${PORT_TICK} -hdbp ${PORT_HDB} -libCommon ${LIB_COMMON} -libR ${LIB_R} -dirHDB ${DIR_HDB} </dev/null >> ${DIR_LOGS_PROC}/rdb1.log 2>&1 &"
 START_RDB2="${QEXEC} ${PROC_RDB2} -p ${PORT_RDB2} -tp ${PORT_TICK} -hdbp ${PORT_HDB} -libCommon ${LIB_COMMON} -libR ${LIB_R} -dirHDB ${DIR_HDB} </dev/null >> ${DIR_LOGS_PROC}/rdb2.log 2>&1 &"
 START_FEED="${QEXEC} ${PROC_FEED} -p ${PORT_FEED} -tp ${PORT_TICK} -libCommon ${LIB_COMMON} </dev/null >> ${DIR_LOGS_PROC}/feed.log 2>&1 &"
-START_RTE="${QEXEC} ${PROC_RTE} -p ${PORT_RTE} -tp ${PORT_TICK} -hdb ${PORT_HDB} -dirHome ${DIR_HOME} -dirHome ${DIR_HOME} -sub trade quote </dev/null >> ${DIR_LOGS_PROC}/rte.log 2>&1 &"
+START_CEP="${QEXEC} ${PROC_CEP} -p ${PORT_CEP} -tp ${PORT_TICK} -hdb ${PORT_HDB} -dirHome ${DIR_HOME} -dirHome ${DIR_HOME} -sub trade quote </dev/null >> ${DIR_LOGS_PROC}/cep.log 2>&1 &"
 
 # Starting process
 echo ""
@@ -43,7 +43,7 @@ case $PROCESS in
         echo "Starting feed process"
         eval $START_FEED
         echo "Starting realtime engine process"
-        eval $START_RTE;;
+        eval $START_CEP;;
 	TICK)
         echo "Starting tick process"
         eval $START_TICK;;
@@ -56,8 +56,8 @@ case $PROCESS in
 	FEED)
         echo "Starting feed process"
         eval $START_FEED;;
-	RTE)
+	CEP)
         echo "Starting realtime engine process"
-        eval $START_RTE
+        eval $START_CEP
 esac
 echo ""
