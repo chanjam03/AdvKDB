@@ -40,12 +40,14 @@ if $interactive; then
         START_TICK="${QEXEC} ${PROC_TICK} sym ${DIR_LOGS_REP} -p ${PORT_TICK} -libCommon ${LIB_COMMON} -libU ${LIB_U} -dirTick ${DIR_TICK}"
         START_RDB1="${QEXEC} ${PROC_RDB1} -p ${PORT_RDB1} -tp ${PORT_TICK} -hdbp ${PORT_HDB} -libCommon ${LIB_COMMON} -libR ${LIB_R} -dirHDB ${DIR_HDB}"
         START_RDB2="${QEXEC} ${PROC_RDB2} -p ${PORT_RDB2} -tp ${PORT_TICK} -hdbp ${PORT_HDB} -libCommon ${LIB_COMMON} -libR ${LIB_R} -dirHDB ${DIR_HDB}"
+        START_RDB_CSV="${QEXEC} ${PROC_RDB_CSV} -p ${PORT_RDB_CSV} -tp ${PORT_TICK} -hdbp ${PORT_HDB} -libCommon ${LIB_COMMON} -libR ${LIB_R} -dirHDB ${DIR_HDB}"
         START_FEED="${QEXEC} ${PROC_FEED} -p ${PORT_FEED} -tp ${PORT_TICK} -libCommon ${LIB_COMMON}"
         START_CEP="${QEXEC} ${PROC_CEP} -p ${PORT_CEP} -tp ${PORT_TICK} -hdbp ${PORT_HDB} -libCommon ${LIB_COMMON} -libR ${LIB_R} -dirHDB ${DIR_HDB}"
 else
         START_TICK="${QEXEC} ${PROC_TICK} sym ${DIR_LOGS_REP} -p ${PORT_TICK} -libCommon ${LIB_COMMON} -libU ${LIB_U} -dirTick ${DIR_TICK} </dev/null >> ${DIR_LOGS_PROC}/tick.log 2>&1 &"
         START_RDB1="${QEXEC} ${PROC_RDB1} -p ${PORT_RDB1} -tp ${PORT_TICK} -hdbp ${PORT_HDB} -libCommon ${LIB_COMMON} -libR ${LIB_R} -dirHDB ${DIR_HDB} </dev/null >> ${DIR_LOGS_PROC}/rdb1.log 2>&1 &"
         START_RDB2="${QEXEC} ${PROC_RDB2} -p ${PORT_RDB2} -tp ${PORT_TICK} -hdbp ${PORT_HDB} -libCommon ${LIB_COMMON} -libR ${LIB_R} -dirHDB ${DIR_HDB} </dev/null >> ${DIR_LOGS_PROC}/rdb2.log 2>&1 &"
+        START_RDB_CSV="${QEXEC} ${PROC_RDB_CSV} -p ${PORT_RDB_CSV} -tp ${PORT_TICK} -hdbp ${PORT_HDB} -libCommon ${LIB_COMMON} -libR ${LIB_R} -dirHDB ${DIR_HDB} </dev/null >> ${DIR_LOGS_PROC}/rdb1_csv.log 2>&1 &"
         START_FEED="${QEXEC} ${PROC_FEED} -p ${PORT_FEED} -tp ${PORT_TICK} -libCommon ${LIB_COMMON} </dev/null >> ${DIR_LOGS_PROC}/feed.log 2>&1 &"
         START_CEP="${QEXEC} ${PROC_CEP} -p ${PORT_CEP} -tp ${PORT_TICK} -hdbp ${PORT_HDB} -libCommon ${LIB_COMMON} -libR ${LIB_R} -dirHDB ${DIR_HDB} </dev/null >> ${DIR_LOGS_PROC}/cep.log 2>&1 &"
 fi
@@ -60,6 +62,8 @@ case $PROCESS in
         eval $START_RDB1
         echo "Starting rdb2 process"
         eval $START_RDB2
+        echo "Starting rdbCsv process"
+        eval $START_RDB_CSV
         echo "Starting feed process"
         eval $START_FEED
         echo "Starting realtime engine process"
@@ -73,6 +77,9 @@ case $PROCESS in
 	RDB2)
         echo "Starting rdb2 process"
         eval $START_RDB2;;
+	RDB_CSV)
+        echo "Starting rdbCsv process"
+        eval $START_RDB_CSV;;
 	FEED)
         echo "Starting feed process"
         eval $START_FEED;;

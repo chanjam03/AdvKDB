@@ -26,6 +26,7 @@ PROCESS=$1
 TEST_TICK=$(ps -ef | grep -v "grep" | grep "${PROC_TICK}"| wc -l)
 TEST_RDB1=$(ps -ef | grep -v "grep" | grep "${PROC_RDB1}"| wc -l)
 TEST_RDB2=$(ps -ef | grep -v "grep" | grep "${PROC_RDB2}"| wc -l)
+TEST_RDB_CSV=$(ps -ef | grep -v "grep" | grep "${PROC_RDB_CSV}"| wc -l)
 TEST_FEED=$(ps -ef | grep -v "grep" | grep "${PROC_FEED}"| wc -l)
 TEST_CEP=$(ps -ef | grep -v "grep" | grep "${PROC_CEP}"| wc -l)
 
@@ -47,6 +48,11 @@ case $PROCESS in
             echo "Realtime Database 2 is - UP"
         else
             echo "Realtime Database 2 is - DOWN"
+        fi
+        if [ $TEST_RDB_CSV -eq 1 ]; then
+            echo "Realtime Database csv is - UP"
+        else
+            echo "Realtime Database csv is - DOWN"
         fi
         if [ $TEST_FEED -eq 1 ]; then
             echo "Feedhandler is - UP"
@@ -75,6 +81,12 @@ case $PROCESS in
             echo "Realtime Database 2 is - UP"
         else
             echo "Realtime Database 2 is - DOWN"
+        fi;;
+	RDB_CSV)
+        if [ $TEST_RDB_CSV -eq 1 ]; then
+            echo "Realtime Database csv is - UP"
+        else
+            echo "Realtime Database csv is - DOWN"
         fi;;
 	FEED)
         if [ $TEST_FEED -eq 1 ]; then

@@ -35,6 +35,8 @@ case $PROCESS in
         lsof -i :${PORT_RDB1} | grep LISTEN | awk '{print $2; exit}' | xargs kill -9
         echo "Stopping rdb2 process"
         lsof -i :${PORT_RDB2} | grep LISTEN | awk '{print $2; exit}' | xargs kill -9
+        echo "Stopping rdbCsv process"
+        lsof -i :${PORT_RDB_CSV} | grep LISTEN | awk '{print $2; exit}' | xargs kill -9
         echo "Stopping tick process"
         lsof -i :${PORT_TICK} | grep LISTEN | awk '{print $2; exit}' | xargs kill -9;;
 	TICK)
@@ -46,6 +48,9 @@ case $PROCESS in
 	RDB2)
         echo "Stopping rdb2 process"
         lsof -i :${PORT_RDB2} | grep LISTEN | awk '{print $2; exit}' | xargs kill -9;;
+	RDB_CSV)
+        echo "Stopping rdbCsv process"
+        lsof -i :${PORT_RDB_CSV} | grep LISTEN | awk '{print $2; exit}' | xargs kill -9;;
 	FEED)
         echo "Stopping feed process"
         lsof -i :${PORT_FEED} | grep LISTEN | awk '{print $2; exit}' | xargs kill -9;;
