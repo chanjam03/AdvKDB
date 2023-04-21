@@ -6,7 +6,12 @@
 ##
 ##  sh bin/reload.sh TABLE SYM (DATE)
 ##
-##	i.e. sh bin/replay.sh trade ibm.n
+##	i.e. sh bin/replay.sh trade ENB
+##
+##  Parameters:
+##      - [TABLE]: table on which to filter log file 
+##      - [SYM]: symbol to filter on
+##      - [DATE]: date to filter on (optional - will default to today)
 ##
 ################################################################################
 
@@ -19,7 +24,7 @@ SYM=$2
 DATE=$3
 
 # Defining start commands
-COMM="${QEXEC} ${PROC_REPLAY} -p ${PORT_REPLAY} -libCommon ${LIB_COMMON} -dirReplay ${DIR_LOGS_REP} -table ${TABLE} -sym ${SYM} -date ${DATE}"
+COMM="${QEXEC} ${PROC_REPLAY} -p ${PORT_REPLAY} -libCommon ${LIB_COMMON} -dirReplay ${DIR_LOGS_REP} -dirTick ${DIR_TICK} -table ${TABLE} -sym ${SYM} -date ${DATE}"
 
 # Starting process
-$COMM
+echo $COMM
