@@ -39,8 +39,8 @@ getask:{[s] prices[s]+getmovement[s]} /generate ask price
 .z.ts:{
   s:n?syms;
   $[0<flag mod 10;
-    h(".u.upd";`quote;(n#.z.P;s;getbid'[s];getask'[s];n?1000;n?1000)); 
-    h(".u.upd";`trade;(n#.z.P;s;getprice'[s];n?1000))];
+    h(".u.upd";`quote;(n#.z.N;s;getbid'[s];getask'[s];n?1000;n?1000)); 
+    h(".u.upd";`trade;(n#.z.N;s;getprice'[s];n?1000))];
   flag+:1; }
 
 // Trigger timer every 100ms
