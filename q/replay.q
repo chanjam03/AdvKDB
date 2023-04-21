@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 //  
-//  CSV file shell start process
+//  Replay log file process
 //
 //  q csv.q -p <PORT_CSV> -tp <PORT_TICK> --file <FILE> --table <NAME_TABLE>
 //
@@ -18,3 +18,6 @@
 args:(.Q.opt .z.x);
 system raze "l ",(args `libCommon);
 dirReplay:args `dirReplay;
+table:first `$ args `table;
+sym:first `$ args `sym;
+dt:$[`~dt:(first `$ args `date);.z.D;"D"$ string dt];
