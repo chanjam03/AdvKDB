@@ -1,16 +1,11 @@
 import com.kx.c;
-import java.sql.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 
-import java.nio.file.Files;
-import java.util.ArrayList;
-
-public class Main {
+public class csvLoad {
 
     public static void main(String[] args) {
 
-        // Parsing arguments passed from command line
         int port = Integer.parseInt(args[0]);
         String file = args[1];
         String table = args[2];
@@ -19,52 +14,47 @@ public class Main {
 
         try {
 
-            // Connecting to tickerplant
             c = new c("localhost",port);
 
-            // Getting schema types from tickerplant
             Object query = c.k("`$ exec t from meta " + table);
             String queryString = (query.toString());
-            String ret = queryString.substring(0, queryString.length() - 1);
-            char[] types = ret.toCharArray();
+            char[] types = queryString.toCharArray();
 
             try {
-                // Creating reader instance from filepath provided
+
                 FileReader fp = new FileReader(file);
                 BufferedReader reader = new BufferedReader(fp);
                 reader.readLine();
 
-                // Creating loop to parse through rows of csv file reader
                 String delimiter = ",";
                 String line;
 
                 while ((line = reader.readLine()) != null) {
 
-                    // Splitting values and defining new empty array of final values
                     String row[] = line.split(delimiter);
-                    Object updRow[] = new Object[row.length];
 
-                    // Parsing through row values and updating to kdb compatible
                     for (int n = 0; n < row.length; n++) {
                         switch (types[n]) {
                             case 'i':
-                                updRow[n] = new int[] {Integer.parseInt(row[n])};
+                                row[n] = row[n] + "i";
                                 break;
                             case 'f':
-                                updRow[n] = new double[] {Double.parseDouble(row[n])};
+                                row[n] = row[n] + "f";
                                 break;
                             case 'd':
-                                updRow[n] = new Date[] {Date.valueOf(row[n])};
+                                row[n] = row[n].replace("-",".");
                                 break;
-                            case 'p':
-                                updRow[n] = new Timestamp[] {Timestamp.valueOf(row[n].replace("D", " "))};
+                            case 'n':
+                                row[n] = "0D" + row[n].split("D")[1];
                                 break;
-                            default:
-                                updRow[n] = new String[] {row[n]};
+                            case 's':
+                                row[n] = "`" + row[n];
+                                break;
                         }
                     }
 
-                    c.ks(".u.upd", "optTrades",updRow);
+                    String msg = ".u.upd[`" + table + ";(enlist " + String.join(";enlist ",row) + ")]";
+                    c.k(msg);
 
                 }
 

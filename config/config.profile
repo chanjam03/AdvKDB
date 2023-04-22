@@ -33,7 +33,7 @@ PROC_CEP="${DIR_Q}/cep.q"
 PROC_Q_CSV="${DIR_Q}/csvLoad.q"
 PROC_REPLAY="${DIR_Q}/replay.q"
 PROC_PYTHON_CSV="${DIR_SCRIPTS}/csvLoad.py"
-PROC_JAVA_CSV="${DIR_SCRIPTS}/csvLoad.java"
+PROC_JAVA_CSV="${DIR_SCRIPTS}/csvLoadJava"
 
 ### ~~~ PROCESS PORTS ~~~ ###
 PORT_TICK="5010"

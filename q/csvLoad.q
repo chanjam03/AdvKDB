@@ -33,3 +33,5 @@ vals:value flip t;
 
 // Writing csv to tickerplant
 h (".u.upd";table;vals);
+
+\\
