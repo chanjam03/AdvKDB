@@ -24,6 +24,7 @@ PROCESS=$1
 
 # Defining test commands
 TEST_TICK=$(ps -ef | grep -v "grep" | grep "${PROC_TICK}"| wc -l)
+TEST_HDB=$(ps -ef | grep -v "grep" | grep "${PROC_TICK}"| wc -l)
 TEST_RDB1=$(ps -ef | grep -v "grep" | grep "${PROC_RDB1}"| wc -l)
 TEST_RDB2=$(ps -ef | grep -v "grep" | grep "${PROC_RDB2}"| wc -l)
 TEST_RDB_CSV=$(ps -ef | grep -v "grep" | grep "${PROC_RDB_CSV}"| wc -l)
@@ -38,6 +39,11 @@ case $PROCESS in
             echo "Tickerplant is - UP"
         else
             echo "Tickerplant is - DOWN"
+        fi
+        if [ $TEST_HDB -eq 1 ]; then
+            echo "Historical Database is - UP"
+        else
+            echo "Historical Database is - DOWN"
         fi
         if [ $TEST_RDB1 -eq 1 ]; then
             echo "Realtime Database 1 is - UP"
@@ -69,6 +75,12 @@ case $PROCESS in
             echo "Tickerplant is - UP"
         else
             echo "Tickerplant is - DOWN"
+        fi;;
+    HDB)
+        if [ $TEST_HDB -eq 1 ]; then
+            echo "Historical Database is - UP"
+        else
+            echo "Historical Database is - DOWN"
         fi;;
 	RDB1)
         if [ $TEST_RDB1 -eq 1 ]; then

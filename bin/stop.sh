@@ -13,7 +13,7 @@
 ##      	in the proper order
 ##
 ##  Options:
-##      - [PROCESS] -> "ALL","TICK","RDB1","RDB2","FEED","CEP"
+##      - [PROCESS] -> "ALL","TICK","HDB","RDB1","RDB2","FEED","CEP"
 ##
 ################################################################################
 
@@ -37,11 +37,16 @@ case $PROCESS in
         lsof -i :${PORT_RDB2} | grep LISTEN | awk '{print $2; exit}' | xargs kill -9
         echo "Stopping rdbCsv process"
         lsof -i :${PORT_RDB_CSV} | grep LISTEN | awk '{print $2; exit}' | xargs kill -9
+        echo "Stopping hdb process"
+        lsof -i :${PORT_HDB} | grep LISTEN | awk '{print $2; exit}' | xargs kill -9
         echo "Stopping tick process"
         lsof -i :${PORT_TICK} | grep LISTEN | awk '{print $2; exit}' | xargs kill -9;;
-	TICK)
-        echo "Stopping tick process"
-        lsof -i :${PORT_TICK} | grep LISTEN | awk '{print $2; exit}' | xargs kill -9;;
+	CEP)
+        echo "Stopping realtime engine process"
+        lsof -i :${PORT_CEP} | grep LISTEN | awk '{print $2; exit}' | xargs kill -9;;
+	FEED)
+        echo "Stopping feed process"
+        lsof -i :${PORT_FEED} | grep LISTEN | awk '{print $2; exit}' | xargs kill -9;;
 	RDB1)
         echo "Stopping rdb1 process"
         lsof -i :${PORT_RDB1} | grep LISTEN | awk '{print $2; exit}' | xargs kill -9;;
@@ -51,11 +56,11 @@ case $PROCESS in
 	RDB_CSV)
         echo "Stopping rdbCsv process"
         lsof -i :${PORT_RDB_CSV} | grep LISTEN | awk '{print $2; exit}' | xargs kill -9;;
-	FEED)
-        echo "Stopping feed process"
-        lsof -i :${PORT_FEED} | grep LISTEN | awk '{print $2; exit}' | xargs kill -9;;
-	CEP)
-        echo "Stopping realtime engine process"
-        lsof -i :${PORT_CEP} | grep LISTEN | awk '{print $2; exit}' | xargs kill -9;;
+        HDB)
+        echo "Stopping hdb process"
+        lsof -i :${PORT_HDB} | grep LISTEN | awk '{print $2; exit}' | xargs kill -9;;
+	TICK)
+        echo "Stopping tick process"
+        lsof -i :${PORT_TICK} | grep LISTEN | awk '{print $2; exit}' | xargs kill -9
 esac
 echo ""

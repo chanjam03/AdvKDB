@@ -25,6 +25,7 @@ LIB_R="${DIR_TICK}/r.q"
 
 ### ~~~ PROCESS SCRIPTS ~~~ ###
 PROC_TICK="${DIR_Q}/tick.q"
+PROC_HDB="${DIR_Q}/hdb.q"
 PROC_RDB1="${DIR_Q}/rdb1.q"
 PROC_RDB2="${DIR_Q}/rdb2.q"
 PROC_RDB_CSV="${DIR_Q}/rdbCsv.q"
