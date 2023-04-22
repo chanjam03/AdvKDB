@@ -26,15 +26,15 @@ source ./config/config.profile
 
 # Reading and parsing parameters passed
 LANGUAGE=$1
-NAME_CSV=$2
-NAME_TABLE=$3
+FILE_NAME=$2
+TABLE=$3
 
 # Adding file root to csv name
-FILE="${DIR_FILES}/${NAME_CSV}"
+FILE="${DIR_FILES}/${FILE_NAME}"
 
 # Creating command to run based on passed argument
 case $LANGUAGE in
-    Q) COMM="${QEXEC} ${PROC_Q_CSV} -p ${PORT_CSV} --tp ${PORT_TICK} --file ${FILE} --table ${NAME_TABLE}";;
+    Q) COMM="${QEXEC} ${PROC_Q_CSV} -p ${PORT_CSV} -tp ${PORT_TICK}  -libCommon ${LIB_COMMON} -file ${FILE} -table ${TABLE}";;
     PYTHON) COMM="${PYEXEC} ${PROC_PYTHON_CSV} --file ${FILE} --table ${NAME_TABLE}";;
     JAVA) COMM="${JVEXEC} ${PROC_JAVA_CSV} ${PORT_TICK} ${FILE} ${NAME_TABLE}"
 esac
