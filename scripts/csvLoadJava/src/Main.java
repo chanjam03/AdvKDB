@@ -48,27 +48,23 @@ public class Main {
                     for (int n = 0; n < row.length; n++) {
                         switch (types[n]) {
                             case 'i':
-                                updRow[n] = Integer.parseInt(row[n]);
+                                updRow[n] = new int[] {Integer.parseInt(row[n])};
                                 break;
                             case 'f':
-                                updRow[n] = Double.parseDouble(row[n]);
+                                updRow[n] = new double[] {Double.parseDouble(row[n])};
                                 break;
                             case 'd':
-                                updRow[n] = Date.valueOf(row[n]);
+                                updRow[n] = new Date[] {Date.valueOf(row[n])};
                                 break;
                             case 'p':
-                                updRow[n] = Timestamp.valueOf(row[n].replace("D", " "));
+                                updRow[n] = new Timestamp[] {Timestamp.valueOf(row[n].replace("D", " "))};
                                 break;
                             default:
-                                updRow[n] = row[n];
+                                updRow[n] = new String[] {row[n]};
                         }
                     }
 
-                    Object[]rowT={new c.Timespan(),"SYMBOL",new Double(93.5),new Long(300)};
-                    Object[]newRo={new Timestamp(),"SYM",Integer.parseInt("0"),Date.valueOf("2021-03-12"),new Double }
-
-                    System.out.println(rowT.getClass().getName());
-                    System.out.println(updRow.getClass().getName());
+                    c.ks(".u.upd", "optTrades",updRow);
 
                 }
 
