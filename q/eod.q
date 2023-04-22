@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 //  
-//  Historical database q script
+//  End of day processing q script
 //
 //  q hdb.q -p <PORT_HDB> -libCommon <LIB_COMMON> -dirHDB <DIR_HDB>
 //
@@ -12,8 +12,3 @@
 //      - [libCommon]: common library containing functions
 //
 ////////////////////////////////////////////////////////////////////////////////
-
-// Parsing command line arguments and sourcing applicable libraries
-args:(.Q.opt .z.x);
-system raze "l ",(args `libCommon);
-system raze "l ",(args `dirHDB);
