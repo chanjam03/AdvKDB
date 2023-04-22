@@ -33,13 +33,17 @@ TABLE=$3
 FILE="${DIR_FILES}/${FILE_NAME}"
 
 # Creating command to run based on passed argument
+echo""
+echo "Loading CSV file: ${FILE_NAME} with ${LANGUAGE}"
 case $LANGUAGE in
     Q)
-    eval "${QEXEC} ${PROC_Q_CSV} -p ${PORT_CSV} -tp ${PORT_TICK}  -libCommon ${LIB_COMMON} -file ${FILE} -table ${TABLE}";;
+    eval "${QEXEC} ${PROC_Q_CSV} -p ${PORT_CSV} -tp ${PORT_TICK}  -libCommon ${LIB_COMMON} -file ${FILE} -table ${TABLE} </dev/null >> ${DIR_LOGS_PROC}/csvLoad.log 2>&1 &";;
     PYTHON)
-    eval "${PYEXEC} ${PROC_PYTHON_CSV} -tp ${PORT_TICK} -file ${FILE} -table ${TABLE}";;
+    eval "${PYEXEC} ${PROC_PYTHON_CSV} -tp ${PORT_TICK} -file ${FILE} -table ${TABLE} </dev/null >> ${DIR_LOGS_PROC}/csvLoad.log 2>&1 &";;
     JAVA) 
     cd $PROC_JAVA_CSV
-    eval "${JVEXEC} csvLoad ${PORT_TICK} ${FILE} ${TABLE}"
+    eval "${JVEXEC} csvLoad ${PORT_TICK} ${FILE} ${TABLE} </dev/null >> ${DIR_LOGS_PROC}/csvLoad.log 2>&1 &"
     cd $DIR_HOME
 esac
+echo "Loading CSV process - DONE"
+echo""

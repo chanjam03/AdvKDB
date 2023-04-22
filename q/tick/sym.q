@@ -5,5 +5,3 @@ OHLC:([]time:`timespan$(); sym:`symbol$();volume:`int$();maxPx:`float$();minPx:`
 
 // Manual tables - To be updated by manual process
 optTrades:([]time:`timespan$();sym:`symbol$();seq:`int$();expDate:`date$();strike:`float$();optionType:`symbol$();size:`int$();price:`float$();bbp:`float$();bap:`float$();ubp:`float$();uap:`float$();bp:`float$();ap:`float$();bs:`int$();as:`int$();ex:`symbol$())
-
-.u.upd[`trade;(enlist .z.N;`test;6.9f;5i)]

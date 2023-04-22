@@ -13,7 +13,7 @@
 //      - [dirTick]: tick directory containing schema file
 //      - [table]: table on which to filter log file 
 //      - [sym]: symbol to filter on 
-//      - [date]: date to filter on (optional - will default to today)
+//      - [date]: date to filter on
 //
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -25,7 +25,7 @@ dirTick:args `dirTick;
 system raze "l ",(args `dirTick),"/sym.q";
 table:first `$ args `table;
 filterSym:first `$ args `sym;
-dt:$[`~dt:(first `$ args `date);string .z.D;dt];
+dt:args `date;
 
 // Creating filepaths to replay file and schemareading in values
 vals:get hsym `$ raze dirReplay,"/sym",dt;
