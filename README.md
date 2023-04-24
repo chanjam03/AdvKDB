@@ -5,8 +5,7 @@ Advanced kdb+ project completed as culiminating portion of First Derivatives, Ca
 
 Initializing:
     
-    Project file can be placed anywhere, configurable paramters located in AdvKDB/config/config.profile, should be
-    adjusted accordingly.
+    Project file can be placed anywhere, configurable paramters located in AdvKDB/config/config.profile, should be adjusted accordingly. ALl other parameters should not be adjusted.
 
     One of these configurable variables is the associated Q environment variables. Q must be installed (https://code.kx.com/q/learn/install/)
 
@@ -16,15 +15,44 @@ Initializing:
 
 <h2>Tick</h2>
 
-Starting:
+General Tick Process:
 
     To start the entire tickerplant process can run the following command:
 
-    ```
-    sh bin/start.sh ALL
-    ```
+        sh bin/start.sh ALL
 
-    This will bring up all intraday processes contained in 
+    This will bring up all intraday processes contained in tick project. Can test that processes are up using the test script:
+
+        sh bin/test.sh ALL
+
+    Also can bring up individual processes by specifying each, for example:
+
+        sh bin/start.sh -i TICK
+    
+    Specifying the optional tag will bring up the process in an interactive terminal, for possible debugging or anaylzing the process
+    Finally All the same fiunctionality described above is also possible with stopping processes, for example:
+
+        sh bin/stop.sh ALL
+        sh bin/stop.sh TICK
+    
+    All logs for processes are kept in sub directory: AdvKDB/logs/process with each process containing there own log file where stdout and stderr are both wrote to.
+
+    For any other process specifics, detailed documentation for all scripts are included at the top of each script including parameters passed and options for calling.
+
+Tickerplant Replay:
+
+    For replay of a tickerplant log file run the replay.sh script which takes 3 arguments to specify:
+
+        sh bin/replay.sh TABLE SYM DATE
+
+    An example in this case is included below as I have used Canadian stocks in the random generating feed handler:
+
+        sh bin/replay.sh trade ENB 2023.04.21
+
+    What this is doing above is reading in the tickerplant log file from 2023.04.21, filtering on trade table with sym `ENB.
+    The new log file is written to the same location with the file handle 
+
+
 
 Exercise 1: Tick
 Create a project with the following components and requirements. The basis of the exercise will be tick scripts available here:
