@@ -1,14 +1,30 @@
 <h1>Advanced KDB+</h1>
 Advanced kdb+ project completed as culiminating portion of First Derivatives, Capital Markets Training Program.
 
+<h2>Getting Started</h2>
+
 Initializing:
     
     Project file can be placed anywhere, configurable paramters located in AdvKDB/config/config.profile, should be
-    adjusted accordingly. 
+    adjusted accordingly.
 
     One of these configurable variables is the associated Q environment variables. Q must be installed (https://code.kx.com/q/learn/install/)
 
+    For the PYEXEC and JVEXEC these should point to your executable versions of each. If contained in path already these can be kept the same
+
     Once all prepared, cd into AdvKDB directory, all commands should be ran from within this main project directory.
+
+<h2>Tick</h2>
+
+Starting:
+
+    To start the entire tickerplant process can run the following command:
+
+    ```
+    sh bin/start.sh ALL
+    ```
+
+    This will bring up all intraday processes contained in 
 
 Exercise 1: Tick
 Create a project with the following components and requirements. The basis of the exercise will be tick scripts available here:
