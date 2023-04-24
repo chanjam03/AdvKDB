@@ -14,7 +14,7 @@
 ##      	in the proper order
 ##
 ##  Options:
-##      - [PROCESS] -> "ALL","TICK","HDB","RDB1","RDB2","FEED","CEP"
+##      - [PROCESS] -> "ALL","TICK","HDB","RDB1","RDB2","FEED","CEP","WEB"
 ##
 ################################################################################
 
@@ -43,6 +43,7 @@ if $interactive; then
         START_RDB_CSV="${QEXEC} ${PROC_RDB_CSV} -p ${PORT_RDB_CSV} -tp ${PORT_TICK} -hdbp ${PORT_HDB} -libCommon ${LIB_COMMON} -libR ${LIB_R} -dirHDB ${DIR_HDB}"
         START_FEED="${QEXEC} ${PROC_FEED} -p ${PORT_FEED} -tp ${PORT_TICK} -libCommon ${LIB_COMMON}"
         START_CEP="${QEXEC} ${PROC_CEP} -p ${PORT_CEP} -tp ${PORT_TICK} -hdbp ${PORT_HDB} -libCommon ${LIB_COMMON} -libR ${LIB_R} -dirHDB ${DIR_HDB}"
+        START_WEB="${QEXEC} ${PROC_WEB} -p ${PORT_WEB}"
 else
         START_TICK="${QEXEC} ${PROC_TICK} sym ${DIR_LOGS_REP} -p ${PORT_TICK} -libCommon ${LIB_COMMON} -libU ${LIB_U} -dirTick ${DIR_TICK} </dev/null >> ${DIR_LOGS_PROC}/tick.log 2>&1 &"
         START_HDB="${QEXEC} ${PROC_HDB} -p ${PORT_HDB} -libCommon ${LIB_COMMON} -dirHDB ${DIR_HDB} </dev/null >> ${DIR_LOGS_PROC}/rdb1.log 2>&1 &"
@@ -51,6 +52,7 @@ else
         START_RDB_CSV="${QEXEC} ${PROC_RDB_CSV} -p ${PORT_RDB_CSV} -tp ${PORT_TICK} -hdbp ${PORT_HDB} -libCommon ${LIB_COMMON} -libR ${LIB_R} -dirHDB ${DIR_HDB} </dev/null >> ${DIR_LOGS_PROC}/rdb_csv.log 2>&1 &"
         START_FEED="${QEXEC} ${PROC_FEED} -p ${PORT_FEED} -tp ${PORT_TICK} -libCommon ${LIB_COMMON} </dev/null >> ${DIR_LOGS_PROC}/feed.log 2>&1 &"
         START_CEP="${QEXEC} ${PROC_CEP} -p ${PORT_CEP} -tp ${PORT_TICK} -hdbp ${PORT_HDB} -libCommon ${LIB_COMMON} -libR ${LIB_R} -dirHDB ${DIR_HDB} </dev/null >> ${DIR_LOGS_PROC}/cep.log 2>&1 &"
+        START_WEB="${QEXEC} ${PROC_WEB} -p ${PORT_WEB} </dev/null >> ${DIR_LOGS_PROC}/web.log 2>&1 &"
 fi
 
 # Starting process
@@ -69,8 +71,10 @@ case $PROCESS in
         eval $START_RDB_CSV
         echo "Starting feed process"
         eval $START_FEED
-        echo "Starting realtime engine process"
-        eval $START_CEP;;
+        echo "Starting complex event process"
+        eval $START_CEP
+        echo "Starting websocket process"
+        eval $START_WEB;;
 	TICK)
         echo "Starting tick process"
         eval $START_TICK;;
@@ -90,7 +94,10 @@ case $PROCESS in
         echo "Starting feed process"
         eval $START_FEED;;
 	CEP)
-        echo "Starting realtime engine process"
-        eval $START_CEP
+        echo "Starting complex event process"
+        eval $START_CEP;;
+        WEB)
+        echo "Starting websocket process"
+        eval $START_WEB
 esac
 echo ""

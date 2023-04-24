@@ -13,7 +13,7 @@
 ##      	in the proper order
 ##
 ##  Options:
-##      - [PROCESS] -> "ALL","TICK","HDB","RDB1","RDB2","FEED","CEP"
+##      - [PROCESS] -> "ALL","TICK","HDB","RDB1","RDB2","FEED","CEP","WEB"
 ##
 ################################################################################
 
@@ -27,7 +27,9 @@ PROCESS=$1
 echo ""
 case $PROCESS in
         ALL)
-        echo "Stopping realtime engine process"
+        echo "Stopping websocket process"
+        lsof -i :${PORT_WEB} | grep LISTEN | awk '{print $2; exit}' | xargs kill -9
+        echo "Stopping complex event process"
         lsof -i :${PORT_CEP} | grep LISTEN | awk '{print $2; exit}' | xargs kill -9
         echo "Stopping feed process"
         lsof -i :${PORT_FEED} | grep LISTEN | awk '{print $2; exit}' | xargs kill -9
@@ -41,8 +43,11 @@ case $PROCESS in
         lsof -i :${PORT_HDB} | grep LISTEN | awk '{print $2; exit}' | xargs kill -9
         echo "Stopping tick process"
         lsof -i :${PORT_TICK} | grep LISTEN | awk '{print $2; exit}' | xargs kill -9;;
+        WEB)
+        echo "Stopping websocket process"
+        lsof -i :${PORT_CEP} | grep LISTEN | awk '{print $2; exit}' | xargs kill -9;;
 	CEP)
-        echo "Stopping realtime engine process"
+        echo "Stopping complex event process"
         lsof -i :${PORT_CEP} | grep LISTEN | awk '{print $2; exit}' | xargs kill -9;;
 	FEED)
         echo "Stopping feed process"

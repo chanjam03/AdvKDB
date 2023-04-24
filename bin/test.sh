@@ -12,7 +12,7 @@
 ##      - [PROCESS]: Process to test
 ##
 ##  Options:
-##      - [PROCESS] -> "TICK","RDB1","RDB2","FEED","CEP"
+##      - [PROCESS] -> "TICK","RDB1","RDB2","FEED","CEP","WEB"
 ##
 ################################################################################
 
@@ -30,6 +30,7 @@ TEST_RDB2=$(ps -ef | grep -v "grep" | grep "${PROC_RDB2}"| wc -l)
 TEST_RDB_CSV=$(ps -ef | grep -v "grep" | grep "${PROC_RDB_CSV}"| wc -l)
 TEST_FEED=$(ps -ef | grep -v "grep" | grep "${PROC_FEED}"| wc -l)
 TEST_CEP=$(ps -ef | grep -v "grep" | grep "${PROC_CEP}"| wc -l)
+TEST_WEB=$(ps -ef | grep -v "grep" | grep "${PROC_WEB}"| wc -l)
 
 # Testing passed process
 echo ""
@@ -66,9 +67,14 @@ case $PROCESS in
             echo "Feedhandler is - DOWN"
         fi
         if [ $TEST_CEP -eq 1 ]; then
-            echo "Realtime engine is - UP"
+            echo "Complex event is - UP"
         else
-            echo "Realtime engine is - DOWN"
+            echo "Complex evente is - DOWN"
+        fi
+        if [ $TEST_WEB -eq 1 ]; then
+            echo "Websocket is - UP"
+        else
+            echo "Websocket is - DOWN"
         fi;;
 	TICK)
         if [ $TEST_TICK -eq 1 ]; then
@@ -108,9 +114,15 @@ case $PROCESS in
         fi;;
 	CEP)
         if [ $TEST_CEP -eq 1 ]; then
-            echo "Realtime engine is - UP"
+            echo "Complex event is - UP"
         else
-            echo "Realtime engine is - DOWN"
-        fi
+            echo "Complex event is - DOWN"
+        fi;;
+    WEB)
+        if [ $TEST_WEB -eq 1 ]; then
+            echo "Websocket is - UP"
+        else
+            echo "Websocket is - DOWN"
+        fi;;
 esac
 echo ""
