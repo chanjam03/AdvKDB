@@ -1,2 +1,6 @@
 2023.04.24D05:49:15.010182000 User: jamies-macbook-air.local INFO: Subscribing to tables from tickerplant Mem: `used`heap`peak`wmax`mmap`mphy`syms`symw!377056 67108864 67108864 0 0 8589934..
 2023.04.24D05:49:15.014703000 User: jamies-macbook-air.local INFO: Port Closed: 0 Mem: `used`heap`peak`wmax`mmap`mphy`syms`symw!369488 67108864 67108864 0 0 8589934..
+2023.04.24D05:57:51.762103000 User: jamies-macbook-air.local INFO: Subscribing to tables from tickerplant Mem: `used`heap`peak`wmax`mmap`mphy`syms`symw!377072 67108864 67108864 0 0 8589934..
+2023.04.24D05:57:51.766965000 User: jamies-macbook-air.local INFO: Port Closed: 0 Mem: `used`heap`peak`wmax`mmap`mphy`syms`symw!369504 67108864 67108864 0 0 8589934..
+2023.04.24D05:59:53.143240000 User: jamies-macbook-air.local INFO: Port Opened: 8 Mem: `used`heap`peak`wmax`mmap`mphy`syms`symw!876448 67108864 67108864 0 0 8589934..
+2023.04.24D05:59:58.396585000 User: jamies-macbook-air.local INFO: Port Closed: 0 Mem: `used`heap`peak`wmax`mmap`mphy`syms`symw!876416 67108864 67108864 0 0 8589934..

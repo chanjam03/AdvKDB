@@ -5,7 +5,7 @@ var ws, syms = document.getElementById("selectSyms"),
 
 function connect() {
     if ("WebSocket" in window) {
-        ws = new WebSocket("wss://localhost:5060");
+        ws = new WebSocket("ws://localhost:5060");
         ws.onopen = function(e) {
             /* on successful connection, we want to create an
             initial subscription to load all the data into the page*/

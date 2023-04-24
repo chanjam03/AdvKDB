@@ -13,7 +13,7 @@ Initializing:
 
     Once all prepared, cd into AdvKDB directory, all commands should be ran from within this main project directory.
 
-<h2>Tick</h2>
+<h2>Processes</h2>
 
 General Tick Process:
 
@@ -50,51 +50,50 @@ Tickerplant Replay:
         sh bin/replay.sh trade ENB 2023.04.24
 
     What this is doing above is reading in the tickerplant log file from 2023.04.21, filtering on trade table with sym `ENB.
-    The new log file is written to the same location with the file handle 
+    The new log file is written to the same location with the file handle ENB2023.04.24
 
+CSV File Load:
 
+    For loading a csv file into our process we can use the following script: 
 
-Exercise 1: Tick
-Create a project with the following components and requirements. The basis of the exercise will be tick scripts available here:
-(https://github.com/kxsystems/kdb-tick)
+        sh bin/load.sh LANGUAGE CSV TABLE
 
-    1. Ticker Plant:
-    2. RDB
-    3. Feed Handler
-    4. Complex Event Processor
-    5. Logging
-    6. Startup/Shutdown Scripts
-    7. Tickerplant log replay
-    8. Csv file load
-    9. EOD Process
-    10. Schema Change
+    I have implmented the solutions to exercise three into this same script. By specifying what language you would like to use can test all three, examples below:
 
-Exercise 2: Debugging
-Debug the following
+        sh bin/load.sh Q optTrades.csv optTrades 
+        sh bin/load.sh PYTHON optTrades.csv optTrades
+        sh bin/load.sh JAVA optTrades.csv optTrades
 
-    1. TP/RDB problem
-    2. Splay Table problem
-    3. Blocking Calls
-    4. Query Performance
+    Field types are read in from tickerplant so for ay future tables once schema is added to schema file (located here: AdvKDB/q/tick/sym.q) will be able to upload any csv file. 
 
-Exercise 3: API
+    Files should be placed in file directory located here: AdvKDB/files.
 
-    1. Csv file load script (python)
-    2. Csv file load script (java)
-    3. Web Interface - HTML5
+    I have included an additional RDB subscribed to the optTrades table on port 5032. Can either start process intercativley to check:
 
-TO FORMAT:
+        sh bin/start.sh -i RDB_CSV 
 
-- will need to install and import the qconnection library (also provide the link with which to download it)
+    Or hopen a connection on a seperate Q process to check:
 
+        q)h:hopen 5032
+        q)h "optTrades"
 
-Exercise 1. Question 10.
+EOD Process:
 
-Problem:
+    This is a seperate script, in a proper project environment would first run sh bin/stop.sh ALL to ensure all processes are closed. Then will run the eod process to save down data to hdb:
 
-    Discuss the effect a schema change to the trade table in the above system e.g. a sequence number column was added to both trade and quote tables. How you would plan a turnover to update the schema.
+        sh bin/eod.sh -i
+    
+    Should be ran interactivley at least the first time to ensure permissons are ok.
+    This will save down splayed all the tables in schema file, with all but the time and sym colum compressed to the sub directory AdvKDB/hdb.
 
-Solution: 
+    In order to test this can test by bringing up the hdb process interactivley to ensure that data is saved down properly. 
+
+        sh bin/start -i HDB
+        q) trade
+
+    Would schedule this to run at end of day once that initiall stop script is called. 
+
+Schema Change:
 
     To implement a schema change such as adding a new field of sequence numbers would follow these steps:
 
@@ -106,13 +105,13 @@ Solution:
 
     Therefore with this system in specific lets run through the process of adding a sequence number to trade table
 
-        1. Bring down - sh bin/stop.sh ALL - will bring down any connected processes as well as the tickerplant
-        2. Add column to sym file - sym file located in AdvKDB/q/tick/sym.q can update trade table definition with the following:
+        5. Bring down - sh bin/stop.sh ALL - will bring down any connected processes as well as the tickerplant
+        6. Add column to sym file - sym file located in AdvKDB/q/tick/sym.q can update trade table definition with the following:
 
             trade:([]time:`timespan$();sym:`symbol$();price:`float$();size:`int$();seqNum:`int$())
         
-        3. Starting tickerplant up again can check logs for any errors in initializing - sh bin/start.sh TICK
-        4. Opening a handle to the tickerplant on a q process can check the updated schema to make sure changes were picked up:
+        7. Starting tickerplant up again can check logs for any errors in initializing - sh bin/start.sh TICK
+        8. Opening a handle to the tickerplant on a q process can check the updated schema to make sure changes were picked up:
 
             q) h:hopen 5010
             q) h "trade"
@@ -120,14 +119,31 @@ Solution:
             Should return an empty table with the new column included - time sym price size seqNum
                                                                         --------------------------
 
-        5. Finally to make sure historical queries will work and future EOD processing need to use dbmaint.q to update hdb structure something like the following:
+        9. Finally to make sure historical queries will work and future EOD processing need to use dbmaint.q to update hdb structure something like the following:
 
             q) \l AdvKDB/q/common/dbmaint.q
             q) addcol[`:AdvKDB/hdb;`trade;`seqNum;0i]
             q) \l `:AdvKDB/hdb - (to check)
 
-        6. Lastly, can use .Q.chk to ensure data integrity
+        10. Lastly, can use .Q.chk to ensure data integrity
 
-Java package for kx connection can be found here - https://github.com/KxSystems/javakdb/releases
+Debugging:
 
-qpython package required
+    All complete solutions for the debugging problems located in sub directory: AdvKDB/debugging
+
+API:
+
+    As mentioned previously the load functions implementing differnt APIs can be called with the same one that calls the q version
+
+    The web interface is a process that is automatically started up as part of the general tick structure. Can also be started interactivley to see queries form the kdb side:
+
+        sh bin/start.sh -i WEB
+
+    To access the client side should open a websocket enable browser and direct to ~/AdvKDB/scripts/websocket.html. Replace the root path if project folder is not in home directory.
+
+    For API packages:
+
+        Python: requries pandas - pip install pandas
+                requires qpython - pip install qpython (https://pypi.org/project/qPython/)
+        
+        Java: requires kx connection - https://github.com/KxSystems/javakdb/releases
