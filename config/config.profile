@@ -1,8 +1,8 @@
 ### ~~~ CONFIGURABLE PARAMETERS ~~~ ###
-ROOT="~"
-QHOME="~/qhome"
-QLIC="~/qhome"
-QEXEC="~/qhome/m64/q"
+ROOT="/Users/firstderivative/Desktop"
+QHOME="/Users/firstderivative/qhome"
+QLIC="/Users/firstderivative/qhome"
+QEXEC="/Users/firstderivative/qhome/m64/q"
 PYEXEC="python3"
 JVEXEC="java"
 
