@@ -2,12 +2,11 @@
 
 ################################################################################
 ##
-##  CSV file shell start process for python or java (q called with normal start 
-##  script)
+##  EOD replay process for tickerplant process 
 ##
-##  sh eod.sh 
+##  sh bin/eod.sh 
 ##
-##  i.e. sh eod.sh
+##  i.e. sh bin/eod.sh -i
 ##
 ################################################################################
 

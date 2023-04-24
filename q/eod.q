@@ -2,7 +2,7 @@
 //  
 //  End of day processing q script
 //
-//  q hdb.q -p <PORT_HDB> -libCommon <LIB_COMMON> -dirHDB <DIR_HDB>
+//  q hdb.q -p <PORT_HDB> -tp <PORT_TICK> -libCommon <LIB_COMMON> -libSym <LIB_SYM> -dirReplay <DIR_LOGS_REP> -dirHDB <DIR_HDB>
 //
 //  i.e. q feed.q -p 5015 -tp 5010
 //
@@ -10,6 +10,9 @@
 //      - [p]: port to start tickerplant process on as determined by config file
 //      - [tp]: host port of tickerplant
 //      - [libCommon]: common library containing functions
+//      - [libSym]: schema file containing table definitions
+//      - [dirReplay]: directory containing replay files
+//      - [dirHDB]: hisotrical database directory
 //
 ////////////////////////////////////////////////////////////////////////////////
 
