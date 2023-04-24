@@ -43,7 +43,7 @@ if $interactive; then
         START_RDB_CSV="${QEXEC} ${PROC_RDB_CSV} -p ${PORT_RDB_CSV} -tp ${PORT_TICK} -hdbp ${PORT_HDB} -libCommon ${LIB_COMMON} -libR ${LIB_R} -dirHDB ${DIR_HDB}"
         START_FEED="${QEXEC} ${PROC_FEED} -p ${PORT_FEED} -tp ${PORT_TICK} -libCommon ${LIB_COMMON}"
         START_CEP="${QEXEC} ${PROC_CEP} -p ${PORT_CEP} -tp ${PORT_TICK} -hdbp ${PORT_HDB} -libCommon ${LIB_COMMON} -libR ${LIB_R} -dirHDB ${DIR_HDB}"
-        START_WEB="${QEXEC} ${PROC_WEB} -p ${PORT_WEB} -tp ${PORT_TICK} -hdbp ${PORT_HDB}"
+        START_WEB="${QEXEC} ${PROC_WEB} -p ${PORT_WEB} -tp ${PORT_TICK} -hdbp ${PORT_HDB} -libCommon ${LIB_COMMON} -libR ${LIB_R} -dirHDB ${DIR_HDB}"
 else
         START_TICK="${QEXEC} ${PROC_TICK} sym ${DIR_LOGS_REP} -p ${PORT_TICK} -libCommon ${LIB_COMMON} -libU ${LIB_U} -dirTick ${DIR_TICK} </dev/null >> ${DIR_LOGS_PROC}/tick.log 2>&1 &"
         START_HDB="${QEXEC} ${PROC_HDB} -p ${PORT_HDB} -libCommon ${LIB_COMMON} -dirHDB ${DIR_HDB} </dev/null >> ${DIR_LOGS_PROC}/rdb1.log 2>&1 &"
