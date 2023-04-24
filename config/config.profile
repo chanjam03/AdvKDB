@@ -35,7 +35,7 @@ PROC_FEED="${DIR_Q}/feed.q"
 PROC_CEP="${DIR_Q}/cep.q"
 PROC_Q_CSV="${DIR_Q}/csvLoad.q"
 PROC_REPLAY="${DIR_Q}/replay.q"
-PROC_WEB="${DIR_Q}/webSocket.q"
+PROC_WEB="${DIR_Q}/websocket.q"
 PROC_PYTHON_CSV="${DIR_SCRIPTS}/csvLoad.py"
 PROC_JAVA_CSV="${DIR_SCRIPTS}/csvLoadJava"
 
