@@ -21,7 +21,6 @@
 # Sourcing config profile
 source ./config/config.profile
 
-
 # Reading in optional tags
 interactive=false
 while getopts :i opt; do
