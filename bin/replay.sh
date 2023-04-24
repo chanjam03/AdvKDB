@@ -24,7 +24,7 @@ SYM=$2
 DATE=$3
 
 # Defining start commands
-COMM="${QEXEC} ${PROC_REPLAY} -p ${PORT_REPLAY} -libCommon ${LIB_COMMON} -dirReplay ${DIR_LOGS_REP} -dirTick ${DIR_TICK} -table ${TABLE} -sym ${SYM} -date ${DATE} </dev/null >> ${DIR_LOGS_PROC}/replay.log 2>&1 &"
+COMM="${QEXEC} ${PROC_REPLAY} -p ${PORT_REPLAY} -libCommon ${LIB_COMMON} -dirReplay ${DIR_LOGS_REP} -dirTick ${DIR_TICK} -table ${TABLE} -sym ${SYM} -date ${DATE}"
 
 # Starting process
 echo ""

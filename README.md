@@ -47,7 +47,7 @@ Tickerplant Replay:
 
     An example in this case is included below as I have used Canadian stocks in the random generating feed handler:
 
-        sh bin/replay.sh trade ENB 2023.04.21
+        sh bin/replay.sh trade ENB 2023.04.24
 
     What this is doing above is reading in the tickerplant log file from 2023.04.21, filtering on trade table with sym `ENB.
     The new log file is written to the same location with the file handle 
